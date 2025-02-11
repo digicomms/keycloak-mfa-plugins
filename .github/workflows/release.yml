@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
@@ -34,7 +34,7 @@ jobs:
           cd staging
           for jar in *.jar
           do
-              sha512sum $jar | awk '{ print $1 }' > "${jar}.sha512"
+              sha256sum $jar | awk '{ print $1 }' > "${jar}.sha256"
           done
           cd ..
       - uses: actions/upload-artifact@v4
